@@ -17,22 +17,10 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
   it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
       //TODO: Coloque todo o fluxo de teste aqui, considerando as boas práticas e otimizações
       cy.get('.icon-user-unfollow').click()
-      cy.get('#username').type('aluno_ebac@teste.com')
-      cy.get('#password').type('teste@teste.com')
-      cy.get('.woocommerce-form > .button').click()
+      cy.login('aluno_ebac@teste.com', 'teste@teste.com')
       cy.get('#primary-menu > .menu-item-629 > a').click()
-      cy.get('.product-block').first().click()
-      cy.wait(3000)  
-      cy.get('.button-variable-item-S').click()
-      cy.get('.button-variable-item-Green').click()
-      cy.get('.input-text').clear().type('4')
-      cy.get('.single_add_to_cart_button').click()
-      cy.get('.woocommerce-message > .button').click()
-      cy.get('.checkout-button').click()
-      cy.get('#payment_method_cod').click()
-      cy.get('#terms').click()
-      cy.get('#place_order').click()
-      cy.get('.page-title').should('exist')
+      cy.adicionarProduto('4')
+      cy.get('.woocommerce-notice').should('contain', 'Obrigado. Seu pedido foi recebido.')
   });
 
 
